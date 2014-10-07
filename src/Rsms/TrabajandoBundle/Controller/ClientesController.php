@@ -61,6 +61,7 @@ class ClientesController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->subirFoto($this->container->getParameter('rsms.directorio.imagenes'));
             $paqueteNuevo = false;
 
             /*
@@ -315,6 +316,20 @@ class ClientesController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if (null == $entity->getFoto()) {
+                // el usuario no ha modificado la foto original
+                $entity->setRutaFoto($rutaFotoOriginal);
+            } else {
+                // el usuario ha modificado la foto: copiar la foto subida y
+                // guardar la nueva ruta
+                $entity->subirFoto($this->container->getParameter('rsms.directorio.imagenes'));
+
+                // borrar la foto anterior
+                if (!empty($rutaFotoOriginal)) {
+                    $fs = new Filesystem();
+                    $fs->remove($this->container->getParameter('rsms.directorio.imagenes') . $rutaFotoOriginal);
+                }
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('clientes_show', array('id' => $id)));

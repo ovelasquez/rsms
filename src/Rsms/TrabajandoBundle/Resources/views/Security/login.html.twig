@@ -1,9 +1,7 @@
 {% extends '::login.html.twig' %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
+
     <form role="form" class="form-signin" action="{{ path('login_check') }}" method="post">
         <fieldset>
             <div class="form-group">
@@ -17,5 +15,16 @@
             <button class="btn btn-large btn-primary" type="submit">Iniciar</button>
         </fieldset>
     </form>
+
+
+    {% if error %}
+
+        <br>
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ error.message }}.
+        </div>
+
+    {% endif %}
 
 {% endblock %}

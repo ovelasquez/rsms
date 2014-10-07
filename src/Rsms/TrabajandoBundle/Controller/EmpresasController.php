@@ -63,6 +63,7 @@ class EmpresasController extends Controller {
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity->setFecha(new \DateTime());
+            
 
             /*
              * Oscar Velasquez
@@ -108,7 +109,7 @@ class EmpresasController extends Controller {
                 }
 
                 $cantidadSmsAdquiridos = ($cantidadSmsAdquiridos - $cliente->getCantidadSmsUsados());
-                $error='';
+                $error = '';
 
                 if ($bolsaSms->getCantidadSms() <= $cantidadSmsAdquiridos) {
                     //Incrementamos la cantidad de SMS usados al cliente
@@ -120,16 +121,16 @@ class EmpresasController extends Controller {
                     $em->persist($cliente);
                     $em->flush();
                 } else {
-                    
-                    $error=1;
+
+                    $error = 1;
                     $errors = $form->getErrors();
                 }
             }
 
             if (isset($var["cliente"]) && $var["cliente"] == '') {
-                return $this->redirect($this->generateUrl('clientes_show', array('id' => $var["elCliente"],'error'=>$error)));
+                return $this->redirect($this->generateUrl('clientes_show', array('id' => $var["elCliente"], 'error' => $error)));
             } else {
-                return $this->redirect($this->generateUrl('empresas_show', array('id' => $var["laEmpresa"],'error'=>$error)));
+                return $this->redirect($this->generateUrl('empresas_show', array('id' => $var["laEmpresa"], 'error' => $error)));
             }
         }
 
@@ -182,7 +183,7 @@ class EmpresasController extends Controller {
      * @Template()
      */
     public function showAction($id, $error = null) {
-        
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
@@ -205,11 +206,11 @@ class EmpresasController extends Controller {
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
         $crearFormEmpresa = $this->createCreateForm($entity);
-        
-        if ($error==1) {
-            $error="Cantidad de SMS insuficiente";
+
+        if ($error == 1) {
+            $error = "Cantidad de SMS insuficiente";
         } else {
-            $error='';
+            $error = '';
         }
 
         return array(
@@ -219,7 +220,7 @@ class EmpresasController extends Controller {
             'contadorSmsAdquiridos' => $contadorSmsAdquiridos,
             'crearFormEmpresa' => $crearFormEmpresa->createView(),
             'edit_form' => $editForm->createView(),
-            'error'=>$error,
+            'error' => $error,
         );
     }
 
@@ -287,7 +288,7 @@ class EmpresasController extends Controller {
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        if ($editForm->isValid()) {            
             $em->flush();
 
             return $this->redirect($this->generateUrl('empresas_show', array('id' => $id)));

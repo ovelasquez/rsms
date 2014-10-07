@@ -10,7 +10,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection: true
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:        
+        directorio_imagenes: 'uploads/images/'
+
 
 # Assetic Configuration
 assetic:
@@ -83,5 +86,6 @@ parameters:
     rsms.msj.codigonovalido: Codigo invalido, por favor verifique el codigo de la oferta
     rsms.msj.respuestapostulacion: Gracias por postular. Si tu perfil esta acorde con el cargo te contactaremos. En caso contrario estaras en nuestro archivo de elegibles para otra oportunidad
     rsms.msj.enrolamiento: Trabajando.com le informa del servicio de informacion laboral via SMS. Si quiere recibir ofertas de empleo por SMS responda OK al 7342
-    rsms.msj.bienvenida: Bienvenido, se ha inscrito exitosamente. Ahora recibira ofertas de empleo acordes con su perfil. Postule a las ofertas enviado el codigo de la oferta
+    rsms.msj.bienvenida: Bienvenido, se ha inscrito exitosamente. Ahora recibira ofertas de empleo acordes con su perfil. Postule a las ofertas enviado el codigo de la oferta    
+    rsms.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
     
