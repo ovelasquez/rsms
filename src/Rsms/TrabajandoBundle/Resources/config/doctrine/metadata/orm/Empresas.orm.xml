@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Empresas" table="empresas">
+    <indexes>
+      <index name="IDX_70DD49A5DE734E51" columns="cliente_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+    </id>
+    <field name="trabajandoid" type="integer" column="trabajandoid" nullable="false"/>
+    <field name="nombre" type="string" column="nombre" length="255" nullable="false"/>
+    <field name="fecha" type="datetime" column="fecha" nullable="false"/>
+    <field name="cantidadSmsUsados" type="integer" column="cantidad_sms_usados" nullable="false"/>
+    <many-to-one field="cliente" target-entity="Clientes">
+      <join-columns>
+        <join-column name="cliente_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

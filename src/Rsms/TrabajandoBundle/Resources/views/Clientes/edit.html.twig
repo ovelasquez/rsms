@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActC %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Clientes</li>
+                <li class="active"><a href="{{  path('clientes_edit', { 'id': entity.id }) }}">Editar</a></li> 
+                <li class=""><a href="{{ path ('clientes') }}">Listar</a></li>              
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Clientes editar</h1>
+
+    {{ form(edit_form) }}
+{% endblock %}

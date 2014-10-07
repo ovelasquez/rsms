@@ -1,0 +1,21 @@
+{% extends '::login.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
+    <form role="form" class="form-signin" action="{{ path('login_check') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input class="form-control" placeholder="Usuario" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
+            </div>
+            <div class="form-group">
+                <input class="form-control" placeholder="Password" name="_password" type="password" value="">
+            </div>
+
+            <!-- Change this to a button or input when using this as a form -->
+            <button class="btn btn-large btn-primary" type="submit">Iniciar</button>
+        </fieldset>
+    </form>
+
+{% endblock %}

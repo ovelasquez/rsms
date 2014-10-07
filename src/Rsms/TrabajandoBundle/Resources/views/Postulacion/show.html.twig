@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActE %}{% endblock %}
+{% block menuActP %}class="active"{% endblock %}
+{% block menuLateral %}  
+<div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Postulaciones</li>
+              <li ><a href="{{ path ('envios') }}">Listar</a></li>
+              
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Detalle</h1>
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Mensaje</th>
+                <td>{{ entity.mensaje }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de carga</th>
+                <td>{{ entity.fechaCarga|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fono</th>
+                <td>{{ entity.fono }}</td>
+            </tr>
+            <tr>
+                <th>Mensaje de repuesta</th>
+                <td>{{ entity.mensajeRepuesta }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de repuesta</th>
+                <td>{{ entity.fechaRepuesta|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Status de repuesta</th>
+                <td>{{ entity.statusRepuesta }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('postulacion') }}" class="btn btn-primary">
+            Volver
+        </a>
+    
+{% endblock %}

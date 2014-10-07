@@ -1,0 +1,40 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * BolsaSms
+ *
+ * @ORM\Table(name="bolsa_sms")
+ * @ORM\Entity
+ */
+class BolsaSms
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="bolsa_sms_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_sms", type="integer", nullable=false)
+     */
+    private $cantidadSms;
+
+
+}

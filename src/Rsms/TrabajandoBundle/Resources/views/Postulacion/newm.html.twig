@@ -1,0 +1,25 @@
+{% extends 'RsmsBundle::layout.html.twig' %}
+
+{% block title %}Reclutamiento SMS - Envios{% endblock %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+<h1>Cargar Candidatos </h1>
+{% if cargamass %}
+    <div class="messages">Se cargaron {{ tot }} candidatos, haga clic en volver para ver lista</div>    
+{% endif %}   
+<form action="{{ path('candidatos_createm') }}" method="post" {{ form_enctype(form) }} class="formedit">
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit"  class="symfony-button-grey">crear</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('candidatos') }}" class="symfony-button-green2">
+            volver
+        </a>
+    </li>
+</ul>
+{% endblock %}

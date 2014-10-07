@@ -1,0 +1,64 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Empresas
+ *
+ * @ORM\Table(name="empresas", indexes={@ORM\Index(name="IDX_70DD49A5DE734E51", columns={"cliente_id"})})
+ * @ORM\Entity
+ */
+class Empresas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="empresas_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="trabajandoid", type="integer", nullable=false)
+     */
+    private $trabajandoid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_sms_usados", type="integer", nullable=false)
+     */
+    private $cantidadSmsUsados;
+
+    /**
+     * @var \Clientes
+     *
+     * @ORM\ManyToOne(targetEntity="Clientes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
+     * })
+     */
+    private $cliente;
+
+
+}

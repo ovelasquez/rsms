@@ -1,0 +1,3 @@
+postulacion:
+    type: rest
+    resource: Rsms\TrabajandoBundle\Controller\PostulacionController

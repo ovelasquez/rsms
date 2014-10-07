@@ -1,0 +1,106 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Postulacion
+ *
+ * @ORM\Table(name="postulacion", indexes={@ORM\Index(name="idx_17b321bd9bc276e5", columns={"id_envio"})})
+ * @ORM\Entity
+ */
+class Postulacion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="postulacion_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mensaje", type="string", length=160, nullable=false)
+     */
+    private $mensaje;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="smallint", nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_carga", type="datetime", nullable=false)
+     */
+    private $fechaCarga;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fono", type="string", length=255, nullable=false)
+     */
+    private $fono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mensaje_repuesta", type="string", length=160, nullable=true)
+     */
+    private $mensajeRepuesta;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_repuesta", type="datetime", nullable=true)
+     */
+    private $fechaRepuesta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status_repuesta", type="smallint", nullable=true)
+     */
+    private $statusRepuesta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_opratel", type="string", length=160, nullable=true)
+     */
+    private $idOpratel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mensaje_repuesta_trabajando", type="string", length=255, nullable=true)
+     */
+    private $mensajeRepuestaTrabajando;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status_repuesta_trabajando", type="string", length=10, nullable=true)
+     */
+    private $statusRepuestaTrabajando;
+
+    /**
+     * @var \Envios
+     *
+     * @ORM\ManyToOne(targetEntity="Envios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_envio", referencedColumnName="id")
+     * })
+     */
+    private $idEnvio;
+
+
+}

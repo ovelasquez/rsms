@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Reclutamiento SMS">
+        <meta name="author" content="Reclutamiento SMS">
+
+        <title>{% block title %}Reclutamiento SMS!{% endblock %}</title>
+
+        {% block stylesheets %}
+            <!-- Bootstrap Core CSS -->
+            <link href="{{ asset('bundles/rsmstrabajando/css/bootstrap.min.css') }}" rel="stylesheet">
+            <!-- MetisMenu CSS -->
+            <link href="{{ asset('bundles/rsmstrabajando/css/plugins/metisMenu/metisMenu.min.css') }}" rel="stylesheet">        
+            <!-- Timeline CSS -->        
+            <link href="{{ asset('bundles/rsmstrabajando/css/plugins/timeline.css') }}" rel="stylesheet">
+            <!-- Custom CSS -->
+            <link href="{{ asset('bundles/rsmstrabajando/css/sb-admin-2.css') }}" rel="stylesheet">        
+            <!-- Morris Charts CSS -->
+            <link href="{{ asset('bundles/rsmstrabajando/css/plugins/morris.css') }}" rel="stylesheet">        
+            <!-- Custom Fonts -->        
+            <link href="{{ asset('bundles/rsmstrabajando/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet">
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
+        {% endblock %}              
+    </head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/rsmstrabajando/ico/favicon.ico') }}" />
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Reclutamiento SMS v1.0</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                {{ app.user.getNombre }} {{ app.user.getApellido }}
+                <!-- /.dropdown -->
+                <li class="dropdown">
+
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    {% set id = (app.user.getId) %} 
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="{{ path ('usuarios_show', { 'id': id }) }}"><i class="fa fa-user fa-fw"></i> Perfil Usuario</a>
+                        </li>
+                        <!-- li><a href="{{ path ('usuarios') }}"><i class="fa fa-gear fa-fw"></i> Perfil</a >
+                        </li -->
+                        <li class="divider"></li>
+                        <li><a href="{{ path ('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+
+                        <li>
+                            <a class="active" href="{{ path ('default_adm') }}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
+                        </li>
+
+                        {% if (is_granted('ROLE_SUPER_ADMIN')) %}
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Clientes<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ path ('clientes') }}">Clientes</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path ('paquetesms') }}">Paquetes SMS</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Empresas<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="{{ path ('empresas') }}">Empresas</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path ('bolsasms') }}">Bolsas SMS</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                        {% endif %}
+
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Estadísticas</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> {% block entidad %}Home{% endblock %}</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            {% block body %}
+                <p>Reclutamiento SMS</p>
+            {% endblock %}
+
+
+
+            <!-- /.Contenido -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    {% block javascripts %}
+        <!-- jQuery Version 1.11.0 -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/jquery-1.11.0.js') }}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/bootstrap.min.js') }}"></script> 
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/plugins/metisMenu/metisMenu.min.js') }}"></script> 
+
+        <!-- DataTables JavaScript -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/plugins/dataTables/jquery.dataTables.js') }}"></script> 
+        <script src="{{ asset('bundles/rsmstrabajando/js/plugins/dataTables/dataTables.bootstrap.js') }}"></script> 
+
+
+        <!-- Morris Charts JavaScript -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/plugins/morris/raphael.min.js') }}"></script>
+        <!--   Custom Theme JavaScript -->
+        <script src="{{ asset('bundles/rsmstrabajando/js/sb-admin-2.js') }}"></script>
+
+
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActC %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+
+{% block menuLateral %}  
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Empresa Bolsa Sms</li>
+                <li class="active"><a href="{{ path ('empresabolsasms') }}">Listar</a></li> 
+                <li class=""><a href="{{ path ('empresabolsasms_new') }}">Crear</a></li>              
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+
+{% block body -%}
+    <h1>Empresa Bolsa Sms</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Empresa</th>
+                <th>Bolsa Sms</th>
+                <th>Fecha</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('empresabolsasms_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                 <td>{{ entity.empresa }}</td>
+                 <td>{{ entity.bolsasms }}</td>
+                 
+                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('empresabolsasms_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('empresabolsasms_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+    {% endblock %}

@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block entidad %} Rol - {{ entity.name }} 
+    <!-- Button trigger modal -->
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+        Editar
+    </button>                  
+{% endblock %}
+{% block body %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar {{ entity.name }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form(edit_form, { 'attr': {'role':'form'} }) }}                           
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id='error' style='display:none' class="btn btn-success" data-toggle="modal" data-target="#myError">
+        Editar
+    </button>
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ entity.role }}</td>
+            </tr>
+            
+                </tbody>
+            </table>
+
+    {{ form(delete_form) }}
+{% endblock %}

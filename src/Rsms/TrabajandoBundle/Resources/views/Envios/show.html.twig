@@ -1,0 +1,78 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActE %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+<div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Envios</li>
+              <li ><a href="{{ path ('envios') }}">Listar</a></li>
+              <li ><a href="{{ path ('envios_cargar') }}">Cargar</a></li>
+              
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Detalle</h1>
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Rut</th>
+                <td>{{ entity.rut }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ entity.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Fono</th>
+                <td>{{ entity.fono }}</td>
+            </tr>
+            <tr>
+                <th>Oferta</th>
+                <td>{{ entity.oferta }}</td>
+            </tr>
+            <tr>
+                <th>Aviso id</th>
+                <td>{{ entity.avisoid }}</td>
+            </tr>
+            <tr>
+                <th>Dominio id</th>
+                <td>{{ entity.dominioid }}</td>
+            </tr>
+            <tr>
+                <th>Empresa</th>
+                <td>{{ entity.empresa }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Código</th>
+                <td>{{ entity.codigo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('envios') }}" class="btn btn-primary">
+            Volver
+        </a>
+    
+
+{% endblock %}

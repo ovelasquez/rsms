@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block entidad %} Usuario - {{ entity.nombre }} {{ entity.apellido }} 
+    <!-- Button trigger modal -->
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+        Editar
+    </button>                  
+{% endblock %}
+{% block body %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar {{ entity.nombre }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form(edit_form, { 'attr': {'role':'form'} }) }}                           
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id='error' style='display:none' class="btn btn-success" data-toggle="modal" data-target="#myError">
+        Editar
+    </button>
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ entity.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ entity.username }}</td>
+            </tr>
+
+            <tr>
+                <th>Password</th>
+                <td>********</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>            
+            <tr>
+                <th>Activo</th>
+                <td>{% if entity.isActive==1 %}
+                    <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                    {% else %}
+                        <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+                        {% endif %}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+    {{ form(delete_form) }}
+{% endblock %}

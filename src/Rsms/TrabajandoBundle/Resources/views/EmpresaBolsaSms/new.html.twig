@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block menuActI %}{% endblock %}
+{% block menuActBS %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Empresa Bolsa</li>
+                <li class="active"><a href="{{ path ('empresabolsasms_new') }}">Crear</a></li> 
+                <li class=""><a href="{{ path ('empresabolsasms') }}">Listar</a></li>
+                
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+
+{% block body -%}
+    <h1>Empresa Bolsa Sms crear</h1>
+
+    {{ form(form) }}
+
+        
+{% endblock %}

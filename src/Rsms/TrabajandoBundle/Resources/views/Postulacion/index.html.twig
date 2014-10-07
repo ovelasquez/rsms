@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActE %}{% endblock %}
+{% block menuActP %}class="active"{% endblock %}
+{% block menuLateral %}  
+<div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Postulaciones</li>
+              <li  class="active" ><a href="{{ path ('postulacion') }}">Listar</a></li>
+              
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Lista</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mensaje</th>
+                <th>Status</th>
+                <th>Fecha de carga</th>
+                <th>Fono</th>
+                <th>Status de confirmación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('postulacion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.mensaje }}</td>
+                <td>{{ entity.status }}</td>
+                <td>{% if entity.fechaCarga %}{{ entity.fechaCarga|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.fono }}</td>
+                <td>{{ entity.statusRepuesta }}</td>
+                <td>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <a class="btn" href="{{ path('postulacion_show', { 'id': entity.id }) }}" title="Ver" alt="Ver"><i class=" icon-edit"></i></a>
+                        
+                </div>  </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

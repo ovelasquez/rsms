@@ -1,0 +1,54 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Candidatos
+ *
+ * @ORM\Table(name="candidatos")
+ * @ORM\Entity
+ */
+class Candidatos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="candidatos_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="trabajandoid", type="bigint", nullable=false)
+     */
+    private $trabajandoid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=255, nullable=false)
+     */
+    private $apellido;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
+
+
+}

@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActPS %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+
+{% block menuLateral %}  
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Paquetes Sms</li>
+                <li class="active"><a href="{{ path ('paquetesms') }}">Listar</a></li> 
+                <li class=""><a href="{{ path ('paquetesms_new') }}">Crear</a></li>              
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Paquetes Sms</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cantidadsms</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('paquetesms_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.nombre }}</td>
+                    <td>{{ entity.cantidadSms }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('paquetesms_show', { 'id': entity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('paquetesms_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>      
+{% endblock %}

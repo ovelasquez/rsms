@@ -1,0 +1,53 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EmpresaBolsaSms
+ *
+ * @ORM\Table(name="empresa_bolsa_sms", indexes={@ORM\Index(name="IDX_28956676521E1991", columns={"empresa_id"}), @ORM\Index(name="IDX_28956676BB27AB50", columns={"bolsa_sms_id"})})
+ * @ORM\Entity
+ */
+class EmpresaBolsaSms
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="empresa_bolsa_sms_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var \Empresas
+     *
+     * @ORM\ManyToOne(targetEntity="Empresas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="empresa_id", referencedColumnName="id")
+     * })
+     */
+    private $empresa;
+
+    /**
+     * @var \BolsaSms
+     *
+     * @ORM\ManyToOne(targetEntity="BolsaSms")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="bolsa_sms_id", referencedColumnName="id")
+     * })
+     */
+    private $bolsaSms;
+
+
+}

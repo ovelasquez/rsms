@@ -1,0 +1,38 @@
+rsms_trabajando:
+    resource: "@RsmsTrabajandoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+postulacion_todos:
+    pattern:  /todos
+    defaults: { _controller: RsmsTrabajandoBundle:Postulacion:todos, _format: json }
+    
+NelmioApiDocBundle:
+  resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+  prefix:   /api/doc
+  
+postulacion_post:
+ pattern: /api/postulaciones
+ defaults: { _controller: RsmsTrabajandoBundle:Postulacion:post, _format: json }
+ methods: POST
+ 
+postulacion_get:
+ pattern: /api/postulaciones/{id}
+ defaults: { _controller: RsmsTrabajandoBundle:Postulacion:get, _format: json }
+ methods: GET
+
+envios_post:
+ pattern: /api/envios
+ defaults: { _controller: RsmsTrabajandoBundle:Envios:post, _format: json }
+ methods: POST
+ 
+login:
+    pattern:   /login
+    defaults:  { _controller: RsmsTrabajandoBundle:Security:login }
+    
+logout:
+    pattern:   /logout
+    defaults:  { _controller: RsmsTrabajandoBundle:Security:logout }   
+    
+login_check:
+    pattern:   /login_check

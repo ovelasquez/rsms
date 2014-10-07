@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActC %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+    <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Empresa Bolsa Sms</li>
+                <li class="active"><a href="{{ path('empresabolsasms_show', { 'id': entity.id }) }}">Ver</a></li>                            
+                <li class=""><a href="{{  path('empresabolsasms_edit', { 'id': entity.id }) }}">Editar</a></li> 
+                <li class=""><a href="{{ path ('empresabolsasms') }}">Listar</a></li>   
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+
+{% block body -%}
+    <h1>Empresa Bolsa Sms</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Empresa</th>
+                <td>{{ entity.empresa }}</td>
+            </tr>
+             <tr>
+                <th>Bolsa Sms</th>
+                <td>{{ entity.bolsasms }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ entity.fecha|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

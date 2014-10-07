@@ -1,0 +1,93 @@
+{% extends '::base.html.twig' %}
+
+{% block body_ %}
+
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">Reclutamiento SMS</a>
+                <div class="nav-collapse collapse">
+
+                    <p class="navbar-text pull-right">
+                        <a href="{{ path ('logout') }}">Salir</a>
+                    </p>
+                    <ul class="nav">
+                        <li class="active"><a href="{{ path ('default_adm') }}">Home</a></li>
+                        <li class=""><a href="{{ path ('clientes') }}">Clientes</a></li>
+                        <li class=""><a href="{{ path ('paquetesms') }}">Paquetes SMS</a></li>
+                        <li class=""><a href="{{ path ('clientepaquetesms') }}">Crédito</a></li>
+                        <li class=""><a href="{{ path ('empresas') }}">Empresas</a></li>
+                        <li class=""><a href="{{ path ('bolsasms') }}">Bolsa Sms</a></li>
+                        <li class=""><a href="{{ path ('empresabolsasms') }}">BSms</a></li>
+                        <li class=""><a href="{{ path ('envios') }}">Envíos</a></li>
+                        <li class=""><a href="{{ path ('postulacion') }}">Postulaciones</a></li>
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Main hero unit for a primary marketing message or call to action -->
+        <div class="hero-unit">
+            <h1>Reclutamiento SMS</h1>
+            <p>Prueba Piloto Trabajando.com</p>
+            <p><a href="{{ path('envios_cargar') }}" class="btn btn-primary btn-large">Cargar registros</a></p>
+        </div>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="span4">
+                <h2>Envíos cargados</h2>
+                <p> Número de contactos cargados: <h3>{{ te }}</h3></p>
+                <p><a class="btn" href="{{ path('envios') }}">Ver listado &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+                <h2>Postulaciones</h2>
+                <p>Número de postulaciones recibidas: <h3>{{ tpt }}</h3> </p>
+                <p><a class="btn" href="{{ path('postulacion') }}">Ver listado &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+                <h2>SMS enviados</h2>
+                <p>Total de SMS enviados<h3>{{ tec+tpc }}  </h3> </p>
+
+            </div><!--/span-->
+
+        </div>
+        <div class="row">            
+
+            <div class="span4">
+                <h2>Envíos efectivos</h2>
+                <p>Número de contactos cargados y enviados: <h3>{{ tee }}</h3> </p>
+            </div><!--/span-->
+
+            <div class="span4">
+                <h2>Envíos-Postulaciones</h2>
+                <p>Número de envios con postulaciones recibidas: <h3>{{ tp }}</h3> </p>
+            </div><!--/span-->
+
+            <div class="span4">
+                <h2>Efectividad</h2>
+                <p>Porcentaje de efectividad<h3>{{ ef }}  %</h3> </p>
+
+            </div><!--/span-->
+
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; Reclutamiento SMS 2014</p>
+        </footer>
+
+    </div> <!-- /container -->
+{% endblock %}

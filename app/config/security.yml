@@ -1,0 +1,54 @@
+security:
+    encoders:
+        Rsms\TrabajandoBundle\Entity\Usuarios:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_CLIENTES
+        ROLE_SUPER_ADMIN: [ROLE_CLIENTES, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        user_db:
+            entity: { class: RsmsTrabajandoBundle:Usuarios }
+            
+        
+
+    firewalls:
+      api:
+            provider:   user_db
+            pattern:    /api/.*
+            http_basic: true
+      
+      secured_area:
+            pattern:    ^/
+            anonymous: ~
+            http_basic:
+                realm: "Area Restringida"
+            form_login:
+                login_path:  /login
+                check_path:  /login_check
+                default_target_path: /adm/
+          
+
+    access_control:      
+      - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}      
+      - { path: ^/adm/groups, roles: ROLE_SUPER_ADMIN } 
+      
+      - { path: ^/adm/clientepaquetesms, roles: ROLE_CLIENTES }
+      - { path: ^/adm/empresas, roles: ROLE_CLIENTES }
+      
+      - { path: ^/adm/usuarios/crear/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/usuarios/ver/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/usuarios/editar/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/usuarios/actualizar/*, roles: ROLE_CLIENTES }      
+      - { path: ^/adm/usuarios, roles: ROLE_SUPER_ADMIN }
+      - { path: ^/adm/usuarios/eliminar/*, roles: ROLE_SUPER_ADMIN }
+      
+      - { path: ^/adm/clientes/ver/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/clientes/editar/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/clientes/actualizar/*, roles: ROLE_CLIENTES }
+      - { path: ^/adm/clientes, roles: ROLE_CLIENTES }
+      
+      - { path: ^/adm, roles: ROLE_CLIENTES }

@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActCPS %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+     <div class="span3">
+        <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+                <li class="nav-header">Cliente Paquete Sms</li>
+                <li class="active"><a href="{{ path ('clientepaquetesms_new') }}">Crear</a></li> 
+                <li class=""><a href="{{ path ('clientepaquetesms') }}">Listar</a></li>
+                
+            </ul>
+        </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Cliente Paquete Sms crear</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('clientepaquetesms') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

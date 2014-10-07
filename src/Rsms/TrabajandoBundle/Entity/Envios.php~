@@ -1,0 +1,152 @@
+<?php
+
+namespace Rsms\TrabajandoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Envios
+ *
+ * @ORM\Table(name="envios")
+ * @ORM\Entity
+ */
+class Envios
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="envios_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rut", type="string", length=60, nullable=false)
+     */
+    private $rut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=60, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=60, nullable=false)
+     */
+    private $apellido;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fono", type="string", length=20, nullable=false)
+     */
+    private $fono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="oferta", type="string", length=160, nullable=false)
+     */
+    private $oferta;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_oferta", type="datetime", nullable=false)
+     */
+    private $fechaOferta;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avisoid", type="bigint", nullable=false)
+     */
+    private $avisoid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="personaid", type="bigint", nullable=false)
+     */
+    private $personaid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dominioid", type="bigint", nullable=false)
+     */
+    private $dominioid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="empresaid", type="bigint", nullable=false)
+     */
+    private $empresaid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="empresa", type="string", length=50, nullable=true)
+     */
+    private $empresa;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="smallint", nullable=false)
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status_enrolamiento", type="smallint", nullable=false)
+     */
+    private $statusEnrolamiento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=10, nullable=false)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id_opratel", type="string", length=16, nullable=true)
+     */
+    private $idOpratel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="repuesta_opratel", type="string", length=255, nullable=true)
+     */
+    private $repuestaOpratel;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="por_envio", type="smallint", nullable=false)
+     */
+    private $porEnvio;
+
+
+}

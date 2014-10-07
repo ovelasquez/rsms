@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+{% block menuActI %}{% endblock %}
+{% block menuActE %}class="active"{% endblock %}
+{% block menuActP %}{% endblock %}
+{% block menuLateral %}  
+<div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Envios</li>
+              <li ><a href="{{ path ('envios') }}">Listar</a></li>
+              <li class="active"><a href="{{ path ('envios_cargar') }}">Cargar</a></li>
+              
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+{% endblock %}
+{% block body -%}
+    <h1>Resultados de Carga</h1>
+
+    {% if cargamass %}
+        <div class="alert alert-success">Se cargaron {{ tot }} candidatos, haga clic en volver para ver lista</div>   
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fono</th>
+                <th>Oferta</th>
+                <th>Avisoid</th>
+                <th>Dominioid</th>
+                <th>Empresa</th>
+                <th>Status</th>
+                <th>Fecha</th>
+                <th>Codigo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('envios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.rut }}</td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.apellido }}</td>
+                <td>{{ entity.fono }}</td>
+                <td>{{ entity.oferta }}</td>
+                <td>{{ entity.avisoid }}</td>
+                <td>{{ entity.dominioid }}</td>
+                <td>{{ entity.empresa }}</td>
+                <td>{{ entity.status }}</td>
+                <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.codigo }}</td>
+                
+            </tr>
+        {% endfor %}
+            
+            </tbody></table>
+    {% endif %}   
+        <div> 
+            JSON -CT:
+        <br/>
+        <pre>{{ jsoncT }}</pre>
+        </div>
+        
+        <div class="alert alert-info">Respuesta de consumo: {{ resp }}</div>   
+        
+        <div> 
+            JSON -CF:
+        <br/>
+        <pre>{{ jsoncF }}</pre>
+        </div>
+        
+        <div class="alert alert-info">Respuesta de consumo: {{ resp }}</div>   
+        <a href="{{ path('envios') }}" class="btn btn-primary">
+            Volver
+        </a>
+{% endblock %}
