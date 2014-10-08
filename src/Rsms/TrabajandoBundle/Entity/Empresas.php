@@ -3,6 +3,8 @@
 namespace Rsms\TrabajandoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Empresas
@@ -49,6 +51,16 @@ class Empresas
      * @ORM\Column(name="cantidad_sms_usados", type="integer", nullable=false)
      */
     private $cantidadSmsUsados=0;
+    
+         /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $rutaFoto;
+
+    /**
+     * @Assert\Image(maxSize = "500k")
+     */
+    private $foto;
 
     /**
      * @var \Clientes
@@ -189,5 +201,67 @@ class Empresas
     
     public function __toString() {
         return $this->getNombre();
+    }
+
+    /**
+     * Set rutaFoto
+     *
+     * @param string $rutaFoto
+     * @return Empresas
+     */
+    public function setRutaFoto($rutaFoto)
+    {
+        $this->rutaFoto = $rutaFoto;
+
+        return $this;
+    }
+
+    /**
+     * Get rutaFoto
+     *
+     * @return string 
+     */
+    public function getRutaFoto()
+    {
+        return $this->rutaFoto;
+    }
+    
+    /**
+     * Set foto.
+     *
+     * @param UploadedFile $foto
+     */
+    public function setFoto(UploadedFile $foto = null)
+    {
+        $this->foto = $foto;
+    }
+
+    /**
+     * Get foto.
+     *
+     * @return UploadedFile
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+    
+    /**
+     * Sube la foto de la oferta copiándola en el directorio que se indica y
+     * guardando en la entidad la ruta hasta la foto
+     *
+     * @param string $directorioDestino Ruta completa del directorio al que se sube la foto
+     */
+    public function subirFoto($directorioDestino)
+    {
+        if (null === $this->getFoto()) {
+            return;
+        }
+
+        $nombreArchivoFoto = uniqid('rsms-').'-1.'.$this->getFoto()->guessExtension();
+
+        $this->getFoto()->move($directorioDestino, $nombreArchivoFoto);
+
+        $this->setRutaFoto($nombreArchivoFoto);
     }
 }

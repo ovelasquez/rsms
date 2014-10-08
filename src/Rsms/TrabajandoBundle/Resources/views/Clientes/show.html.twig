@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:70px;height:70px"> {{ entity.nombre }} 
+{% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:80px;"> {{ entity.nombre }} 
     <!-- Button trigger modal -->
     <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
         Editar
@@ -256,7 +256,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-empresas">
                                     <thead>
                                         <tr role="row">
-                                            <th>Id</th>
+                                            <!--th>Id</th-->
                                             <th>Nombre</th>
                                             <th>SMS Usados</th>
 
@@ -265,8 +265,10 @@
                                     <tbody>
                                         {% for empresa in empresas %}
                                             <tr class="odd gradeX">
-                                                <td>{{ loop.index }}</td>
-                                                <td><a href="{{ path('empresas_show', { 'id': empresa.id }) }}">{{ empresa.getNombre() }}</a></td>   
+                                                <!--td>{{ loop.index }}</td-->                                                
+                                                <td>                                                      
+                                                    <a href="{{ path('empresas_show', { 'id': empresa.id }) }}">
+                                                        <img alt="logo" src="{{ asset(directorio_imagenes ~ empresa.rutaFoto) }}" style="width:60px; border: #BCE8F1 solid 1px; margin: 3px">   {{ empresa.getNombre() }}</a></td>   
                                                 <td>{{ empresa.getCantidadSmsUsados() |number_format(0, ',', '.') }}</td> 
 
                                             </tr>

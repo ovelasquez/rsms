@@ -27,61 +27,65 @@
                                         <td><a href="{{ path('usuarios_show', { 'id': entity.id }) }}">{{ loop.index }}</a></td>
                                         <td>{{ entity.nombre }}</td>                                    
                                         <td>{{ entity.apellido }}</td>  
-                                        <td>{{ entity.isActive }}</td>
-                                        <td class="center">
-                                            <a href="{{ path('usuarios_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> Ver</a>
-                                            
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                        <td>{% if entity.isActive==1 %}
+                                            <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                                            {% else %}
+                                                <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+                                                {% endif %}</td>
+                                                <td class="center">
+                                                    <a href="{{ path('usuarios_show', { 'id': entity.id }) }}"><i class="fa fa-2x fa-eye"></i> Ver</a>
+
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.table-responsive -->
 
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
+                    {% endblock %}
+                        {% block javascripts %}
+                            {{ parent()}}
 
-{% endblock %}
-{% block javascripts %}
-    {{ parent()}}
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#dataTables-usuarios').dataTable(
+                                            {
+                                                language: {
+                                                    "sProcessing": "Procesando...",
+                                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                                    "sZeroRecords": "No se encontraron resultados",
+                                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                    "sInfoPostFix": "",
+                                                    "sSearch": "Buscar:",
+                                                    "sUrl": "",
+                                                    "sInfoThousands": ",",
+                                                    "sLoadingRecords": "Cargando...",
+                                                    "oPaginate": {
+                                                        "sFirst": "Primero",
+                                                        "sLast": "Último",
+                                                        "sNext": "Siguiente",
+                                                        "sPrevious": "Anterior"
+                                                    },
+                                                    "oAria": {
+                                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                                    }
+                                                }
+                                            }
+                                    );
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#dataTables-usuarios').dataTable(
-                    {
-                        language: {
-                            "sProcessing": "Procesando...",
-                            "sLengthMenu": "Mostrar _MENU_ registros",
-                            "sZeroRecords": "No se encontraron resultados",
-                            "sEmptyTable": "Ningún dato disponible en esta tabla",
-                            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                            "sInfoPostFix": "",
-                            "sSearch": "Buscar:",
-                            "sUrl": "",
-                            "sInfoThousands": ",",
-                            "sLoadingRecords": "Cargando...",
-                            "oPaginate": {
-                                "sFirst": "Primero",
-                                "sLast": "Último",
-                                "sNext": "Siguiente",
-                                "sPrevious": "Anterior"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                            }
-                        }
-                    }
-            );
-
-        });
-    </script>
-{% endblock %}
+                                });
+                            </script>
+                        {% endblock %}

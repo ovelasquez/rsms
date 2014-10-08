@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block entidad %}  {{ entity.nombre }} 
+{% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:70px;height:70px"> {{ entity.nombre }} 
     <button  class="btn btn-success" data-toggle="modal" data-target="#myModal">
         Editar
     </button>

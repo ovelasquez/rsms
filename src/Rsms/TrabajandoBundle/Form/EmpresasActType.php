@@ -16,6 +16,7 @@ class EmpresasActType extends AbstractType {
         $builder
             ->add('nombre', 'text', array('label' => 'Nombre', 'attr' => array('class' => 'form-control', 'placeholder' => 'Nombre de la empresa')))
             ->add('trabajandoid', null, array('label' => 'Trabajando', 'attr' => array('class' => 'form-control', 'placeholder' => 'Id de Trabajando')))
+            ->add('foto', 'file', array('required' => false))
 
         ;
     }

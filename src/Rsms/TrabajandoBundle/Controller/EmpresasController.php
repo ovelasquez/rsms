@@ -48,19 +48,12 @@ class EmpresasController extends Controller {
      */
     public function createAction(Request $request) {
         $var = $request->request->get('rsms_trabajandobundle_empresas');
-
-//        echo ("<pre>");
-//        debug_zval_dump($var);
-//        echo ("</pre>");
-//        die;
-//        debug_zval_dump($var["EmpresaBolsaSms"]["bolsaSms"]);
-
-
         $entity = new Empresas();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->subirFoto($this->container->getParameter('rsms.directorio.imagenes'));
             $em = $this->getDoctrine()->getManager();
             $entity->setFecha(new \DateTime());
             
@@ -288,7 +281,21 @@ class EmpresasController extends Controller {
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {            
+        if ($editForm->isValid()) {  
+            if (null == $entity->getFoto()) {
+                // el usuario no ha modificado la foto original
+                $entity->setRutaFoto($rutaFotoOriginal);
+            } else {
+                // el usuario ha modificado la foto: copiar la foto subida y
+                // guardar la nueva ruta
+                $entity->subirFoto($this->container->getParameter('rsms.directorio.imagenes'));
+
+                // borrar la foto anterior
+                if (!empty($rutaFotoOriginal)) {
+                    $fs = new Filesystem();
+                    $fs->remove($this->container->getParameter('rsms.directorio.imagenes') . $rutaFotoOriginal);
+                }
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('empresas_show', array('id' => $id)));

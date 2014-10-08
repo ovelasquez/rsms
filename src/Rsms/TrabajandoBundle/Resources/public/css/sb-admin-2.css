@@ -343,3 +343,6 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+.dataTables_paginate{ text-align: right!important;} 
+.dataTables_filter{ text-align: right!important;}
