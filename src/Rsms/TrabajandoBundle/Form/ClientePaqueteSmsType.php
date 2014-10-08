@@ -14,10 +14,6 @@ class ClientePaqueteSmsType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-//                ->add('cliente')
-//                ->add('paqueteSms',null,array('label' => 'Paquete-SMS ','label_attr'=>array('class'=>'col-sm-2 control-label'),'attr'=>array('class'=>'form-control')))
-//                ->add('fecha')
-                
                 ->add('paqueteSms',null,array('required' => true,'label' => 'Paquete-SMS ','attr'=>array('class'=>'form-control')))
         ;
     }

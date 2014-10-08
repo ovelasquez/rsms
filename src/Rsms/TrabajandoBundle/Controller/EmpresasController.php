@@ -12,8 +12,8 @@ use Rsms\TrabajandoBundle\Form\EmpresasType;
 use Rsms\TrabajandoBundle\Form\EmpresasActType;
 use Rsms\TrabajandoBundle\Entity\EmpresaBolsaSms;
 use Rsms\TrabajandoBundle\Entity\BolsaSms;
-use Rsms\TrabajandoBundle\Entity\Clientes;
-use Rsms\TrabajandoBundle\Entity\ClientePaqueteSms;
+//use Rsms\TrabajandoBundle\Entity\Clientes;
+//use Rsms\TrabajandoBundle\Entity\ClientePaqueteSms;
 
 /**
  * Empresas controller.
@@ -176,17 +176,29 @@ class EmpresasController extends Controller {
      * @Template()
      */
     public function showAction($id, $error = null) {
+        
+         // Id del cliente asociado del usuaio logueado
+        $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();
 
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
-
-
+        $entity2 = $em->getRepository('RsmsTrabajandoBundle:Empresas')->findByCliente($cliente);
+        
+        $empresa = new Empresas();
+        $empresas=array(); $i=0;
+        foreach ($entity2 as $empresa){            
+            $empresas[$i]= ($empresa->getId());
+            $i++;
+        }
+         //print_r($empresas); echo in_array($entity->getId(), $empresas);  die;
+        
+        
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Empresas entity.');
         }
 
+        if (in_array($entity->getId(), $empresas)== 1 || (true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
         $empresaBolsaSms = new EmpresaBolsaSms();
         $empresaBolsaSms = $em->getRepository('RsmsTrabajandoBundle:EmpresaBolsaSms')->findByEmpresa($entity->getId());
         $contadorSmsAdquiridos = 0;
@@ -201,7 +213,7 @@ class EmpresasController extends Controller {
         $crearFormEmpresa = $this->createCreateForm($entity);
 
         if ($error == 1) {
-            $error = "Cantidad de SMS insuficiente";
+            $error = "Cantidad de SMS insuficientes";
         } else {
             $error = '';
         }
@@ -215,6 +227,8 @@ class EmpresasController extends Controller {
             'edit_form' => $editForm->createView(),
             'error' => $error,
         );
+    }
+    return $this->redirect($this->generateUrl('clientes_show', array('id' => $cliente)));
     }
 
     /**
@@ -279,6 +293,10 @@ class EmpresasController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+        
+        // Guardar la ruta de la foto original de la oferta
+        $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
+        
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {  

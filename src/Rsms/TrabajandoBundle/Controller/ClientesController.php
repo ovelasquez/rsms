@@ -12,7 +12,7 @@ use Rsms\TrabajandoBundle\Form\ClientesType;
 use Rsms\TrabajandoBundle\Form\ClientesActType;
 use Rsms\TrabajandoBundle\Entity\PaqueteSms;
 use Rsms\TrabajandoBundle\Entity\ClientePaqueteSms;
-use Rsms\TrabajandoBundle\Form\ClientePaqueteSmsType;
+use Rsms\TrabajandoBundle\Form\ClientesPaqueteSmsType;
 use Rsms\TrabajandoBundle\Entity\Empresas;
 use Rsms\TrabajandoBundle\Form\EmpresasType;
 
@@ -195,18 +195,12 @@ class ClientesController extends Controller {
             }
 
             $nuevoPaquetes = new ClientePaqueteSms();
-            $form = $this->createForm(new ClientesType(), $entity, array(
+            $form = $this->createForm(new ClientesPaqueteSmsType(), $entity, array(
                 'action' => $this->generateUrl('clientes_create'),
                 'method' => 'POST',
             ));
 
-            $form->add('submit', 'submit', array('label' => 'Crear'));
-
-//       $form = $this->createFormBuilder($nuevoPaquetes)
-//            ->add('paqueteSms',null,array('required' => true,'label' => 'Paquete-SMS ','attr'=>array('class'=>'form-control')))
-//            
-//            ->add('save', 'submit')
-//            ->getForm();
+            $form->add('submit', 'submit', array('label' => 'Comprar'));
 
             /*
              * Oscar Velasquez
@@ -313,6 +307,10 @@ class ClientesController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
+        
+        // Guardar la ruta de la foto original de la oferta
+        $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
+        
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {

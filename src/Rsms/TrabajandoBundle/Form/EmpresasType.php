@@ -17,7 +17,6 @@ class EmpresasType extends AbstractType {
                 ->add('cliente', null, array('label' => 'Cliente', 'attr' => array('class' => 'form-control', 'placeholder' => 'Nombre de la empresa')))
                 ->add('nombre', 'text', array('label' => 'Nombre', 'attr' => array('class' => 'form-control', 'placeholder' => 'Nombre de la empresa')))
                 ->add('trabajandoid', null, array('label' => 'Trabajando', 'attr' => array('class' => 'form-control', 'placeholder' => 'Id de Trabajando')))
-//                ->add('fecha')
                 ->add('cantidadSmsUsados', 'hidden')
                 ->add('elCliente', 'hidden', array("mapped" => false,))
                 ->add('laEmpresa', 'hidden', array("mapped" => false,))

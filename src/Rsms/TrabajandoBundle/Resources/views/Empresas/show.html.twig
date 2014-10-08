@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:70px;height:70px"> {{ entity.nombre }} 
+{% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:80px;"> {{ entity.nombre }} 
     <button  class="btn btn-success" data-toggle="modal" data-target="#myModal">
         Editar
     </button>
@@ -165,9 +165,9 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-bolsaSms">
                                     <thead>
                                         <tr role="row">
-                                            <th>Id</th>
-                                            <th>Bolsa Sms</th>
-                                            <th>Cantidad Sms</th>
+                                            <th>#</th>
+                                            <th>Bolsa SMS</th>
+                                            <th>Cantidad SMS</th>
                                             <th>Fecha</th>
 
                                         </tr>
@@ -260,7 +260,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr role="row">                                            
-                                            <th>Trabajando</th>
+                                            <th>Id Trabajando</th>
                                             <th>Fecha Registro</th>
 
                                         </tr>
@@ -336,12 +336,14 @@
             var empresaNombreCliente = $('#empresa').find('#rsms_trabajandobundle_empresas_cliente').parent();
             var empresaNombreBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_nombre').parent();
             var empresaCantidadSmsBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').parent();
+            var empresaFoto = $('#empresa').find('#rsms_trabajandobundle_empresas_foto').parent();
 
             $(empresaNombre).hide();
             $(empresaTrabajando).hide();
             $(empresaNombreCliente).hide();
             $(empresaNombreBolsaSms).hide();
             $(empresaCantidadSmsBolsaSms).hide();
+            $(empresaFoto).hide();
 
 
             $('#rsms_trabajandobundle_empresas_laEmpresa').val({{ entity.id }});
