@@ -16,7 +16,7 @@ class ClientesActType extends AbstractType {
         $builder                                    
                 ->add('nombre','text',array('label' => 'Nombre','attr'=>array('class'=>'form-control','placeholder'=>'Nombre del cliente')))
                 ->add('cantidadSmsUsados','hidden')
-                ->add('foto', 'file', array('required' => false))
+                ->add('foto', 'file', array('label' => 'Logo','required' => false))
                 ;
     }
 

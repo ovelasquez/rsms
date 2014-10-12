@@ -169,10 +169,17 @@ class ClientesController extends Controller {
      */
     public function showAction($id, $error = null) {
 
-        // Id del cliente asociado del usuaio logueado
-        $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();
+        $_cliente=FALSE;
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            // Id del cliente asociado del usuaio logueado
+            $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();            
+            if ($cliente==$id) {
+                $_cliente=TRUE;
+            }
+        }
 
-        if ($cliente == $id || (true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
+
+        if ($_cliente  || (TRUE === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
 
 
             $em = $this->getDoctrine()->getManager();
@@ -308,10 +315,10 @@ class ClientesController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
-        
+
         // Guardar la ruta de la foto original de la oferta
         $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
-        
+
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {

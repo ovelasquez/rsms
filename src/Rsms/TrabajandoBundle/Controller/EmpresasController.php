@@ -13,7 +13,7 @@ use Rsms\TrabajandoBundle\Form\EmpresasActType;
 use Rsms\TrabajandoBundle\Entity\EmpresaBolsaSms;
 use Rsms\TrabajandoBundle\Entity\BolsaSms;
 use Symfony\Component\Filesystem\Filesystem;
-//use Rsms\TrabajandoBundle\Entity\Clientes;
+use Rsms\TrabajandoBundle\Entity\Envios;
 //use Rsms\TrabajandoBundle\Entity\ClientePaqueteSms;
 
 /**
@@ -57,7 +57,7 @@ class EmpresasController extends Controller {
             $entity->subirFoto($this->container->getParameter('rsms.directorio.imagenes'));
             $em = $this->getDoctrine()->getManager();
             $entity->setFecha(new \DateTime());
-            
+
 
             /*
              * Oscar Velasquez
@@ -177,59 +177,70 @@ class EmpresasController extends Controller {
      * @Template()
      */
     public function showAction($id, $error = null) {
-        
-         // Id del cliente asociado del usuaio logueado
-        $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();
-
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
-        $entity2 = $em->getRepository('RsmsTrabajandoBundle:Empresas')->findByCliente($cliente);
         
-        $empresa = new Empresas();
-        $empresas=array(); $i=0;
-        foreach ($entity2 as $empresa){            
-            $empresas[$i]= ($empresa->getId());
-            $i++;
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            // Id del cliente asociado del usuaio logueado
+            $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();
+
+            $misEmpresas = $em->getRepository('RsmsTrabajandoBundle:Empresas')->findByCliente($cliente);
+
+            $empresa = new Empresas();
+            $empresas = array();
+            $i = 0;
+            foreach ($misEmpresas as $empresa) {
+                $empresas[$i] = ($empresa->getId());
+                $i++;
+            }
         }
-         //print_r($empresas); echo in_array($entity->getId(), $empresas);  die;
         
-        
+        $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Empresas entity.');
         }
 
-        if (in_array($entity->getId(), $empresas)== 1 || (true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
-        $empresaBolsaSms = new EmpresaBolsaSms();
-        $empresaBolsaSms = $em->getRepository('RsmsTrabajandoBundle:EmpresaBolsaSms')->findByEmpresa($entity->getId());
-        $contadorSmsAdquiridos = 0;
+        if (in_array($entity->getId(), $empresas) == 1 || (true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
+            
+            //Historial de Compras - Bolas SMS
+            $empresaBolsaSms = new EmpresaBolsaSms();
+            $empresaBolsaSms = $em->getRepository('RsmsTrabajandoBundle:EmpresaBolsaSms')->findByEmpresa($entity->getId());
+            $contadorSmsAdquiridos = 0;
 
-        foreach ($empresaBolsaSms as $sms) {
-            $contadorSmsAdquiridos = $contadorSmsAdquiridos + $sms->getBolsaSms()->getCantidadSms();
+            foreach ($empresaBolsaSms as $sms) {
+                $contadorSmsAdquiridos = $contadorSmsAdquiridos + $sms->getBolsaSms()->getCantidadSms();
+            }
+            
+            // SMS Enviados - Detalles
+            $smsEnviados= new Envios();
+            $smsEnviados = $em->getRepository('RsmsTrabajandoBundle:Envios')->findByEmpresaid($entity->getId());
+            
+//            foreach ($smsEnviados as $sms) {
+//               echo $sms->getRut()." ".$sms->getNombre().("</br>");               
+//            }
+            
+
+            $editForm = $this->createEditForm($entity);
+            $deleteForm = $this->createDeleteForm($id);
+            $crearFormEmpresa = $this->createCreateForm($entity);
+
+            if ($error == 1) {
+                $error = "Cantidad de SMS insuficientes";
+            } else {
+                $error = '';
+            }
+
+            return array(
+                'entity' => $entity,
+                'delete_form' => $deleteForm->createView(),
+                'empresaBolsaSms' => $empresaBolsaSms,
+                'contadorSmsAdquiridos' => $contadorSmsAdquiridos,
+                'crearFormEmpresa' => $crearFormEmpresa->createView(),
+                'edit_form' => $editForm->createView(),
+                'error' => $error,
+            );
         }
-
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-        $crearFormEmpresa = $this->createCreateForm($entity);
-
-        if ($error == 1) {
-            $error = "Cantidad de SMS insuficientes";
-        } else {
-            $error = '';
-        }
-
-        return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-            'empresaBolsaSms' => $empresaBolsaSms,
-            'contadorSmsAdquiridos' => $contadorSmsAdquiridos,
-            'crearFormEmpresa' => $crearFormEmpresa->createView(),
-            'edit_form' => $editForm->createView(),
-            'error' => $error,
-        );
-    }
-    return $this->redirect($this->generateUrl('clientes_show', array('id' => $cliente)));
+        return $this->redirect($this->generateUrl('clientes_show', array('id' => $cliente)));
     }
 
     /**
@@ -294,13 +305,13 @@ class EmpresasController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
-        
+
         // Guardar la ruta de la foto original de la oferta
         $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
-        
+
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {  
+        if ($editForm->isValid()) {
             if (null == $entity->getFoto()) {
                 // el usuario no ha modificado la foto original
                 $entity->setRutaFoto($rutaFotoOriginal);

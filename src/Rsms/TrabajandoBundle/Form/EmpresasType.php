@@ -22,7 +22,7 @@ class EmpresasType extends AbstractType {
                 ->add('laEmpresa', 'hidden', array("mapped" => false,))
                 ->add('EmpresaBolsaSms', new EmpresaBolsaSmsType(), array("mapped" => false, 'required' => false, 'label' => ' '))
                 ->add('BolsaSms', new BolsaSmsType(), array("mapped" => false, 'required' => false, 'label' => ' '))
-                ->add('foto', 'file', array('required' => false))
+                ->add('foto', 'file', array('label' => 'Logo','required' => false))
                  
 
         ;
