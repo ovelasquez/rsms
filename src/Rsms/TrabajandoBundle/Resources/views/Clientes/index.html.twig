@@ -16,6 +16,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nombre</th>
+                                    <th>Activo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -23,7 +24,12 @@
                                 {% for entity in entities %}
                                     <tr class="odd gradeX">
                                         <td><a href="{{ path('clientes_show', { 'id': entity.id }) }}">{{ loop.index }}</a></td>
-                                        <td>{{ entity.nombre }}</td>                                    
+                                        <td>{{ entity.nombre }}</td>
+                                        <td>{% if entity.getActive()==1 %}
+                                                    <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+                                                    {% endif %}</td>
                                         <td class="center">
                                             <a href="{{ path('clientes_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> Ver</a>                                            
                                         </td>

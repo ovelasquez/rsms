@@ -49,6 +49,13 @@ class Clientes {
      * @Assert\Image(maxSize = "500k")
      */
     private $foto;
+    
+      /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active;
 
 
     /**
@@ -167,5 +174,30 @@ class Clientes {
     public function getFoto()
     {
         return $this->foto;
+    }
+
+    
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Clientes
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

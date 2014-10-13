@@ -20,7 +20,7 @@ class ClientesType extends AbstractType {
                 ->add('PaqueteSms', new PaqueteSmsType(), array("mapped" => false, 'required' => false, 'label' => ' '))
                 ->add('newcliente', 'hidden', array("mapped" => false,))
                 ->add('foto', 'file', array('label' => 'Logo','required' => false))
-                ->add('isEnrolado', 'checkbox', array('required' => true, 'label' => 'Enrolado',))
+                ->add('active', 'checkbox', array('required' => true, 'label' => 'Enrolado',))
         ;
     }
 
