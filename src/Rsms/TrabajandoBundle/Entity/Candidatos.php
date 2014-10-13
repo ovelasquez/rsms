@@ -59,6 +59,13 @@ class Candidatos
      * })
      */
     private $cliente;
+    
+      /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enrolado", type="boolean", nullable=false)
+     */
+    private $isEnrolado;
 
 
 
@@ -185,5 +192,28 @@ class Candidatos
     public function getCliente()
     {
         return $this->cliente;
+    }
+
+    /**
+     * Set isEnrolado
+     *
+     * @param boolean $isEnrolado
+     * @return Candidatos
+     */
+    public function setIsEnrolado($isEnrolado)
+    {
+        $this->isEnrolado = $isEnrolado;
+    
+        return $this;
+    }
+
+    /**
+     * Get isEnrolado
+     *
+     * @return boolean 
+     */
+    public function getIsEnrolado()
+    {
+        return $this->isEnrolado;
     }
 }

@@ -13,17 +13,14 @@ class ClientesType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-//                ->add('nombre','text',array('label' => 'Nombre','label_attr'=>array('class'=>'col-sm-2 control-label'),'attr'=>array('class'=>'form-control','placeholder'=>'Nombre del cliente')))
-//                ->add('cantidadSmsUsados','hidden')
-//                ->add('ClientePaqueteSms', new ClientePaqueteSmsType(),array('label' => ' '))
-//                ->add('PaqueteSms', new PaqueteSmsType(),array('label' => ' '))                
+        $builder           
                 ->add('nombre', 'text', array('label' => 'Nombre', 'attr' => array('class' => 'form-control', 'placeholder' => 'Nombre del cliente')))
                 ->add('cantidadSmsUsados', 'hidden')
                 ->add('ClientePaqueteSms', new ClientePaqueteSmsType(), array("mapped" => false, 'required' => false, 'label' => ' '))
                 ->add('PaqueteSms', new PaqueteSmsType(), array("mapped" => false, 'required' => false, 'label' => ' '))
                 ->add('newcliente', 'hidden', array("mapped" => false,))
                 ->add('foto', 'file', array('label' => 'Logo','required' => false))
+                ->add('isEnrolado', 'checkbox', array('required' => true, 'label' => 'Enrolado',))
         ;
     }
 

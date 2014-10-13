@@ -360,7 +360,7 @@
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Fecha</th>
-
+                                            <th>Enrolado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -370,248 +370,254 @@
                                                 <td> {{ candidato.getNombre() }}  </td>   
                                                 <td> {{ candidato.getApellido() }}  </td>
                                                 <td>{{ candidato.getFecha()  |date('Y-m-d H:i:s') }}</td> 
+                                                <td>{% if candidato.getIsEnrolado()==1 %}
+                                                    <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+                                                    {% endif %}</td>
 
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>                                                                                
+
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>                                                                                
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </div>                                    
                 </div>
-            </div>
-        </div>                                    
-    </div>
 
-    <input id='error_sms' type='hidden' value='{{ error }}'>
+                <input id='error_sms' type='hidden' value='{{ error }}'>
 
 
 
 
 
-{% endblock %}
-{% block javascripts %}
-    {{ parent()}}
-    <script type="text/javascript">
-        $(document).ready(function () {
+                {% endblock %}
+                    {% block javascripts %}
+                        {{ parent()}}
+                        <script type="text/javascript">
+                            $(document).ready(function () {
 
-            $('#dataTables-empresas').dataTable({
-                language: {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar: ",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
-            }
-            );
-            $('#dataTables-paquetes').dataTable(
-                    {
-                        language: {
-                            "sProcessing": "Procesando...",
-                            "sLengthMenu": "Mostrar _MENU_ registros",
-                            "sZeroRecords": "No se encontraron resultados",
-                            "sEmptyTable": "Ningún dato disponible en esta tabla",
-                            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                            "sInfoPostFix": "",
-                            "sSearch": "Buscar:  ",
-                            "sUrl": "",
-                            "sInfoThousands": ",",
-                            "sLoadingRecords": "Cargando...",
-                            "oPaginate": {
-                                "sFirst": "Primero",
-                                "sLast": "Último",
-                                "sNext": "Siguiente",
-                                "sPrevious": "Anterior"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                            }
-                        }
-                    }
-            );
+                                $('#dataTables-empresas').dataTable({
+                                    language: {
+                                        "sProcessing": "Procesando...",
+                                        "sLengthMenu": "Mostrar _MENU_ registros",
+                                        "sZeroRecords": "No se encontraron resultados",
+                                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                        "sInfoPostFix": "",
+                                        "sSearch": "Buscar: ",
+                                        "sUrl": "",
+                                        "sInfoThousands": ",",
+                                        "sLoadingRecords": "Cargando...",
+                                        "oPaginate": {
+                                            "sFirst": "Primero",
+                                            "sLast": "Último",
+                                            "sNext": "Siguiente",
+                                            "sPrevious": "Anterior"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                        }
+                                    }
+                                }
+                                );
+                                $('#dataTables-paquetes').dataTable(
+                                        {
+                                            language: {
+                                                "sProcessing": "Procesando...",
+                                                "sLengthMenu": "Mostrar _MENU_ registros",
+                                                "sZeroRecords": "No se encontraron resultados",
+                                                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                "sInfoPostFix": "",
+                                                "sSearch": "Buscar:  ",
+                                                "sUrl": "",
+                                                "sInfoThousands": ",",
+                                                "sLoadingRecords": "Cargando...",
+                                                "oPaginate": {
+                                                    "sFirst": "Primero",
+                                                    "sLast": "Último",
+                                                    "sNext": "Siguiente",
+                                                    "sPrevious": "Anterior"
+                                                },
+                                                "oAria": {
+                                                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                                }
+                                            }
+                                        }
+                                );
 
-            $('#dataTables-candidatos').dataTable(
-                    {
-                        language: {
-                            "sProcessing": "Procesando...",
-                            "sLengthMenu": "Mostrar _MENU_ registros",
-                            "sZeroRecords": "No se encontraron resultados",
-                            "sEmptyTable": "Ningún dato disponible en esta tabla",
-                            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                            "sInfoPostFix": "",
-                            "sSearch": "Buscar:  ",
-                            "sUrl": "",
-                            "sInfoThousands": ",",
-                            "sLoadingRecords": "Cargando...",
-                            "oPaginate": {
-                                "sFirst": "Primero",
-                                "sLast": "Último",
-                                "sNext": "Siguiente",
-                                "sPrevious": "Anterior"
-                            },
-                            "oAria": {
-                                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                            }
-                        }
-                    }
-            );
+                                $('#dataTables-candidatos').dataTable(
+                                        {
+                                            language: {
+                                                "sProcessing": "Procesando...",
+                                                "sLengthMenu": "Mostrar _MENU_ registros",
+                                                "sZeroRecords": "No se encontraron resultados",
+                                                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                "sInfoPostFix": "",
+                                                "sSearch": "Buscar:  ",
+                                                "sUrl": "",
+                                                "sInfoThousands": ",",
+                                                "sLoadingRecords": "Cargando...",
+                                                "oPaginate": {
+                                                    "sFirst": "Primero",
+                                                    "sLast": "Último",
+                                                    "sNext": "Siguiente",
+                                                    "sPrevious": "Anterior"
+                                                },
+                                                "oAria": {
+                                                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                                }
+                                            }
+                                        }
+                                );
 
-            if ($('#error_sms').val() !== '') {
-                $('#error').click();
-            }
+                                if ($('#error_sms').val() !== '') {
+                                    $('#error').click();
+                                }
 
-            /*
-             * Oscar Velasquez
-             * Modificamos el tipo de select multiple a simple
-             * Agregamos una nueva opcion al select "Nuevo Paquete Sms"
-             *
-             */
+                                /*
+                                 * Oscar Velasquez
+                                 * Modificamos el tipo de select multiple a simple
+                                 * Agregamos una nueva opcion al select "Nuevo Paquete Sms"
+                                 *
+                                 */
 
-            $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').append('<option value="Nuevo PaqueteSms">Crear PaqueteSms</option>');
+                                $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').append('<option value="Nuevo PaqueteSms">Crear PaqueteSms</option>');
 
-            $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').append('<option value="Nuevo BolsaSms">Crear BolsaSms</option>');
-
-
-            /*
-             * Oscar Velasquez
-             * Inicialmente los campos para crear un Paquete nuevo
-             * Nombre y Cantidad estan ocultos
-             *
-             */
-            var nombrePaqueteSms = $("#rsms_trabajandobundle_clientes_PaqueteSms_nombre").parent();
-            var cantidadPaqueteSms = $("#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms").parent();
-            var nombreCliente = $('#cliente').find('#rsms_trabajandobundle_clientes_nombre').parent();
-
-            $(nombrePaqueteSms).hide();
-            $(cantidadPaqueteSms).hide();
-            $(nombreCliente).hide();
+                                $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').append('<option value="Nuevo BolsaSms">Crear BolsaSms</option>');
 
 
+                                /*
+                                 * Oscar Velasquez
+                                 * Inicialmente los campos para crear un Paquete nuevo
+                                 * Nombre y Cantidad estan ocultos
+                                 *
+                                 */
+                                var nombrePaqueteSms = $("#rsms_trabajandobundle_clientes_PaqueteSms_nombre").parent();
+                                var cantidadPaqueteSms = $("#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms").parent();
+                                var nombreCliente = $('#cliente').find('#rsms_trabajandobundle_clientes_nombre').parent();
 
-            $('#rsms_trabajandobundle_clientes_newcliente').val({{ entity.id }});
-            $('#rsms_trabajandobundle_empresas_elCliente').val({{ entity.id }});
+                                $(nombrePaqueteSms).hide();
+                                $(cantidadPaqueteSms).hide();
+                                $(nombreCliente).hide();
 
 
 
-            $("#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms").on("click", function () {
-
-                /*
-                 * Oscar Velasquez
-                 * Si toman la opcion de crear un nuevo paquete
-                 * habilitamos los campos de Paquetess Nuevo y los colocamos obligatorios
-                 * Sino los ocultamos y le quitamos la opcion de obligatorios
-                 *
-                 */
-
-                if ($('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val() === 'Nuevo PaqueteSms') {
-                    $(nombrePaqueteSms).show();
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').attr("required", '');
-                    $(cantidadPaqueteSms).show();
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').attr("required", '');
-
-                } else {
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').val("");
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').val("");
-                    $(nombrePaqueteSms).hide();
-                    $(cantidadPaqueteSms).hide();
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').removeAttr("required");
-                    $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').removeAttr("required");
-                }
-            });
-
-            /*
-             * Oscar Velasquez
-             * Antes de hacer el submit verificamos si se tomo la opcion de crear un paquete nuevo
-             * y quitamos el valor al select, para no tener problemas con la creacion de la entidad clientes
-             * en el controlador
-             *
-             */
-
-            $("#cliente").submit(function () {
-                if ($('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val() === 'Nuevo PaqueteSms') {
-                    $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val("");
-
-                }
-
-                return true;
-            });
+                                $('#rsms_trabajandobundle_clientes_newcliente').val({{ entity.id }});
+                                $('#rsms_trabajandobundle_empresas_elCliente').val({{ entity.id }});
 
 
-            // Empresa
-            var empresaNombreCliente = $('#empresa').find('#rsms_trabajandobundle_empresas_cliente').parent();
-            var empresaNombreBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_nombre').parent();
-            var empresaCantidadSmsBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').parent();
 
-            $(empresaNombreCliente).hide();
-            $(empresaNombreBolsaSms).hide();
-            $(empresaCantidadSmsBolsaSms).hide();
+                                $("#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms").on("click", function () {
 
-            $("#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms").on("click", function () {
+                                    /*
+                                     * Oscar Velasquez
+                                     * Si toman la opcion de crear un nuevo paquete
+                                     * habilitamos los campos de Paquetess Nuevo y los colocamos obligatorios
+                                     * Sino los ocultamos y le quitamos la opcion de obligatorios
+                                     *
+                                     */
 
-                /*
-                 * Oscar Velasquez
-                 * Si toman la opcion de crear un nuevo paquete
-                 * habilitamos los campos de Paquetess Nuevo y los colocamos obligatorios
-                 * Sino los ocultamos y le quitamos la opcion de obligatorios
-                 *
-                 */
+                                    if ($('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val() === 'Nuevo PaqueteSms') {
+                                        $(nombrePaqueteSms).show();
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').attr("required", '');
+                                        $(cantidadPaqueteSms).show();
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').attr("required", '');
 
-                if ($('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val() === 'Nuevo BolsaSms') {
-                    $(empresaNombreBolsaSms).show();
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').attr("required", '');
-                    $(empresaCantidadSmsBolsaSms).show();
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').attr("required", '');
+                                    } else {
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').val("");
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').val("");
+                                        $(nombrePaqueteSms).hide();
+                                        $(cantidadPaqueteSms).hide();
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_nombre').removeAttr("required");
+                                        $('#rsms_trabajandobundle_clientes_PaqueteSms_cantidadSms').removeAttr("required");
+                                    }
+                                });
 
-                } else {
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').val("");
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').val("");
-                    $(empresaNombreBolsaSms).hide();
-                    $(empresaCantidadSmsBolsaSms).hide();
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').removeAttr("required");
-                    $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').removeAttr("required");
-                }
-            });
+                                /*
+                                 * Oscar Velasquez
+                                 * Antes de hacer el submit verificamos si se tomo la opcion de crear un paquete nuevo
+                                 * y quitamos el valor al select, para no tener problemas con la creacion de la entidad clientes
+                                 * en el controlador
+                                 *
+                                 */
 
-            /*
-             * Oscar Velasquez
-             * Antes de hacer el submit verificamos si se tomo la opcion de crear un paquete nuevo
-             * y quitamos el valor al select, para no tener problemas con la creacion de la entidad clientes
-             * en el controlador
-             *
-             */
+                                $("#cliente").submit(function () {
+                                    if ($('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val() === 'Nuevo PaqueteSms') {
+                                        $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val("");
 
-            $("#empresa").submit(function () {
-                if ($('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val() === 'Nuevo BolsaSms') {
-                    $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val("");
+                                    }
 
-                }
+                                    return true;
+                                });
 
-                return true;
-            });
-        });
-    </script>
-{% endblock %}
+
+                                // Empresa
+                                var empresaNombreCliente = $('#empresa').find('#rsms_trabajandobundle_empresas_cliente').parent();
+                                var empresaNombreBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_nombre').parent();
+                                var empresaCantidadSmsBolsaSms = $('#empresa').find('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').parent();
+
+                                $(empresaNombreCliente).hide();
+                                $(empresaNombreBolsaSms).hide();
+                                $(empresaCantidadSmsBolsaSms).hide();
+
+                                $("#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms").on("click", function () {
+
+                                    /*
+                                     * Oscar Velasquez
+                                     * Si toman la opcion de crear un nuevo paquete
+                                     * habilitamos los campos de Paquetess Nuevo y los colocamos obligatorios
+                                     * Sino los ocultamos y le quitamos la opcion de obligatorios
+                                     *
+                                     */
+
+                                    if ($('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val() === 'Nuevo BolsaSms') {
+                                        $(empresaNombreBolsaSms).show();
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').attr("required", '');
+                                        $(empresaCantidadSmsBolsaSms).show();
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').attr("required", '');
+
+                                    } else {
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').val("");
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').val("");
+                                        $(empresaNombreBolsaSms).hide();
+                                        $(empresaCantidadSmsBolsaSms).hide();
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_nombre').removeAttr("required");
+                                        $('#rsms_trabajandobundle_empresas_BolsaSms_cantidadSms').removeAttr("required");
+                                    }
+                                });
+
+                                /*
+                                 * Oscar Velasquez
+                                 * Antes de hacer el submit verificamos si se tomo la opcion de crear un paquete nuevo
+                                 * y quitamos el valor al select, para no tener problemas con la creacion de la entidad clientes
+                                 * en el controlador
+                                 *
+                                 */
+
+                                $("#empresa").submit(function () {
+                                    if ($('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val() === 'Nuevo BolsaSms') {
+                                        $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val("");
+
+                                    }
+
+                                    return true;
+                                });
+                            });
+                        </script>
+                    {% endblock %}

@@ -54,11 +54,7 @@ class UsuariosType extends AbstractType {
                     'label_attr' => array(
                         'class' => 'control-label')
                 ))
-                
-                
-                
-                
-                
+                                                                                
                 ->add('email', 'email', array(
                     'label' => '* Correo Electrónico',
                     'required' => true,

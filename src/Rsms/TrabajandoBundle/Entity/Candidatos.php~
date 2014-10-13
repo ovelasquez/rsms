@@ -59,6 +59,13 @@ class Candidatos
      * })
      */
     private $cliente;
+    
+      /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_enrolado", type="boolean", nullable=false)
+     */
+    private $isEnrolado;
 
 
 
@@ -162,5 +169,28 @@ class Candidatos
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set cliente
+     *
+     * @param \Rsms\TrabajandoBundle\Entity\Clientes $cliente
+     * @return Candidatos
+     */
+    public function setCliente(\Rsms\TrabajandoBundle\Entity\Clientes $cliente = null)
+    {
+        $this->cliente = $cliente;
+    
+        return $this;
+    }
+
+    /**
+     * Get cliente
+     *
+     * @return \Rsms\TrabajandoBundle\Entity\Clientes 
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
     }
 }
