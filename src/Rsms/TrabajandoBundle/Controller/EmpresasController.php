@@ -238,6 +238,7 @@ class EmpresasController extends Controller {
                 'crearFormEmpresa' => $crearFormEmpresa->createView(),
                 'edit_form' => $editForm->createView(),
                 'error' => $error,
+                'smsEnviados' => $smsEnviados,
             );
         }
         return $this->redirect($this->generateUrl('clientes_show', array('id' => $cliente)));
