@@ -52,7 +52,7 @@
     </div>
 
     <div class="row">
-       
+
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-green">
                 <div class="panel-heading">
@@ -77,8 +77,8 @@
                 </a>
             </div>
         </div>
-                            
-         <div class="col-lg-3 col-md-6">
+
+        <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
@@ -154,7 +154,7 @@
         <div class="col-lg-12" id="datosSmsAdquiridos">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    Historial de Compras - {{ entity.nombre }}                      
+                    SMS adquiridos - {{ entity.nombre }}                      
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -339,15 +339,61 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
+
+
+    <div class="row" id="datosCandidato">
+        <div class="col-lg-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Candidatos - {{ entity.nombre }} 
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-candidatos">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Id</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Fecha</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for candidato in candidatos %}
+                                            <tr class="odd gradeX">
+                                                <td>{{ loop.index }}</td>                                                
+                                                <td> {{ candidato.getNombre() }}  </td>   
+                                                <td> {{ candidato.getApellido() }}  </td>
+                                                <td>{{ candidato.getFecha()  |date('Y-m-d H:i:s') }}</td> 
+
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>                                                                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                                    
+    </div>
+
     <input id='error_sms' type='hidden' value='{{ error }}'>
 
-    <p><a class="btn btn-default"  href="{{ path ('default_adm') }}">Regresar</a></p>
+
+
+
 
 {% endblock %}
 {% block javascripts %}
     {{ parent()}}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $('#dataTables-empresas').dataTable({
                 language: {
@@ -359,7 +405,7 @@
                     "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
                     "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
                     "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
+                    "sSearch": "Buscar: ",
                     "sUrl": "",
                     "sInfoThousands": ",",
                     "sLoadingRecords": "Cargando...",
@@ -387,7 +433,36 @@
                             "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
                             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
                             "sInfoPostFix": "",
-                            "sSearch": "Buscar:",
+                            "sSearch": "Buscar:  ",
+                            "sUrl": "",
+                            "sInfoThousands": ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst": "Primero",
+                                "sLast": "Último",
+                                "sNext": "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            }
+                        }
+                    }
+            );
+
+            $('#dataTables-candidatos').dataTable(
+                    {
+                        language: {
+                            "sProcessing": "Procesando...",
+                            "sLengthMenu": "Mostrar _MENU_ registros",
+                            "sZeroRecords": "No se encontraron resultados",
+                            "sEmptyTable": "Ningún dato disponible en esta tabla",
+                            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix": "",
+                            "sSearch": "Buscar:  ",
                             "sUrl": "",
                             "sInfoThousands": ",",
                             "sLoadingRecords": "Cargando...",
@@ -442,7 +517,7 @@
 
 
 
-            $("#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms").on("click", function() {
+            $("#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms").on("click", function () {
 
                 /*
                  * Oscar Velasquez
@@ -476,7 +551,7 @@
              *
              */
 
-            $("#cliente").submit(function() {
+            $("#cliente").submit(function () {
                 if ($('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val() === 'Nuevo PaqueteSms') {
                     $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').val("");
 
@@ -495,7 +570,7 @@
             $(empresaNombreBolsaSms).hide();
             $(empresaCantidadSmsBolsaSms).hide();
 
-            $("#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms").on("click", function() {
+            $("#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms").on("click", function () {
 
                 /*
                  * Oscar Velasquez
@@ -529,7 +604,7 @@
              *
              */
 
-            $("#empresa").submit(function() {
+            $("#empresa").submit(function () {
                 if ($('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val() === 'Nuevo BolsaSms') {
                     $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').val("");
 

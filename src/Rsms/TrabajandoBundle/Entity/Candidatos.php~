@@ -17,7 +17,7 @@ class Candidatos
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="candidatos_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
@@ -49,6 +49,118 @@ class Candidatos
      * @ORM\Column(name="fecha", type="datetime", nullable=false)
      */
     private $fecha;
+    
+     /**
+     * @var \Clientes
+     *
+     * @ORM\ManyToOne(targetEntity="Clientes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
+     * })
+     */
+    private $cliente;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set trabajandoid
+     *
+     * @param integer $trabajandoid
+     * @return Candidatos
+     */
+    public function setTrabajandoid($trabajandoid)
+    {
+        $this->trabajandoid = $trabajandoid;
+
+        return $this;
+    }
+
+    /**
+     * Get trabajandoid
+     *
+     * @return integer 
+     */
+    public function getTrabajandoid()
+    {
+        return $this->trabajandoid;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Candidatos
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set apellido
+     *
+     * @param string $apellido
+     * @return Candidatos
+     */
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    /**
+     * Get apellido
+     *
+     * @return string 
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return Candidatos
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
 }

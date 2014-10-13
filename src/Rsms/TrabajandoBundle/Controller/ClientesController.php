@@ -16,6 +16,7 @@ use Rsms\TrabajandoBundle\Form\ClientesPaqueteSmsType;
 use Rsms\TrabajandoBundle\Entity\Empresas;
 use Rsms\TrabajandoBundle\Form\EmpresasType;
 use Symfony\Component\Filesystem\Filesystem;
+use Rsms\TrabajandoBundle\Entity\Candidatos;
 
 /**
  * Clientes controller.
@@ -180,15 +181,19 @@ class ClientesController extends Controller {
 
 
         if ($_cliente  || (TRUE === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
-
-
             $em = $this->getDoctrine()->getManager();
-
             $entity = $em->getRepository('RsmsTrabajandoBundle:Clientes')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Empresas entity.');
             }
+            /*
+             * Oscar Velasquez
+             * Buscamos todos los Candidatos asociados al cliente
+             */
+            $candidatos=$em->getRepository('RsmsTrabajandoBundle:Candidatos')->findByCliente($id);
+            
+            
             /*
              * Oscar Velasquez
              * Buscamos todos los paquetesSms asociados al cliente
@@ -245,6 +250,7 @@ class ClientesController extends Controller {
                 'empresaForm' => $empresaForm->createView(),
                 'contadorSmsAdquiridos' => $contadorSmsAdquiridos,
                 'error' => $error,
+                'candidatos' => $candidatos,
             );
         }
         return $this->redirect($this->generateUrl('clientes_show', array('id' => $cliente)));

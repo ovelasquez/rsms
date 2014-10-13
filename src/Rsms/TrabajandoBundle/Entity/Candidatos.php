@@ -49,6 +49,16 @@ class Candidatos
      * @ORM\Column(name="fecha", type="datetime", nullable=false)
      */
     private $fecha;
+    
+     /**
+     * @var \Clientes
+     *
+     * @ORM\ManyToOne(targetEntity="Clientes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
+     * })
+     */
+    private $cliente;
 
 
 
@@ -152,5 +162,28 @@ class Candidatos
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set cliente
+     *
+     * @param \Rsms\TrabajandoBundle\Entity\Clientes $cliente
+     * @return Candidatos
+     */
+    public function setCliente(\Rsms\TrabajandoBundle\Entity\Clientes $cliente = null)
+    {
+        $this->cliente = $cliente;
+    
+        return $this;
+    }
+
+    /**
+     * Get cliente
+     *
+     * @return \Rsms\TrabajandoBundle\Entity\Clientes 
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
     }
 }
