@@ -192,6 +192,8 @@ class EmpresasController extends Controller {
                 $empresas[$i] = ($empresa->getId());
                 $i++;
             }
+        }else {
+            $empresas=array("");
         }
         
         $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
@@ -200,7 +202,7 @@ class EmpresasController extends Controller {
             throw $this->createNotFoundException('Unable to find Empresas entity.');
         }
 
-        if (in_array($entity->getId(), $empresas) == 1 || (true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) {
+        if ((true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) || in_array($entity->getId(), $empresas) == 1 ) {
             
             //Historial de Compras - Bolas SMS
             $empresaBolsaSms = new EmpresaBolsaSms();
