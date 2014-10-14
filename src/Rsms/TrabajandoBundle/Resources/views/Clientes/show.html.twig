@@ -1,15 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block entidad %} <img alt="logo" src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" style="width:80px;"> {{ entity.nombre }} 
-    {% if entity.getActive()==1 %}
-        <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
-    {% else %}
-        <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+
+    {% if (is_granted('ROLE_SUPER_ADMIN')== true) %}
+        {% if (entity.getActive()==1) %}
+            <button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+            <!-- Button trigger modal -->
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                Editar
+            </button>
+        {% else %}
+            <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>    
+        {% endif %}
     {% endif %}
-    <!-- Button trigger modal -->
-    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
-        Editar
-    </button>
+
+
 
 
 {% endblock %}
