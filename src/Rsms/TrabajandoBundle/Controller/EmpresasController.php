@@ -182,9 +182,7 @@ class EmpresasController extends Controller {
         if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
             // Id del cliente asociado del usuaio logueado
             $cliente = $this->get('security.context')->getToken()->getUser()->getCliente()->getId();
-
             $misEmpresas = $em->getRepository('RsmsTrabajandoBundle:Empresas')->findByCliente($cliente);
-
             $empresa = new Empresas();
             $empresas = array();
             $i = 0;
@@ -197,13 +195,11 @@ class EmpresasController extends Controller {
         }
         
         $entity = $em->getRepository('RsmsTrabajandoBundle:Empresas')->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Empresas entity.');
         }
 
-        if ((true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) || in_array($entity->getId(), $empresas) == 1 ) {
-            
+        if ((true === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) || in_array($entity->getId(), $empresas) == 1 ) {            
             //Historial de Compras - Bolas SMS
             $empresaBolsaSms = new EmpresaBolsaSms();
             $empresaBolsaSms = $em->getRepository('RsmsTrabajandoBundle:EmpresaBolsaSms')->findByEmpresa($entity->getId());
@@ -217,11 +213,8 @@ class EmpresasController extends Controller {
             $smsEnviados= new Envios();
             $smsEnviados = $em->getRepository('RsmsTrabajandoBundle:Envios')->findByEmpresaid($entity->getId());
             
-//            foreach ($smsEnviados as $sms) {
-//               echo $sms->getRut()." ".$sms->getNombre().("</br>");               
-//            }
             
-
+            
             $editForm = $this->createEditForm($entity);
             $deleteForm = $this->createDeleteForm($id);
             $crearFormEmpresa = $this->createCreateForm($entity);

@@ -187,6 +187,9 @@ class ClientesController extends Controller {
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Empresas entity.');
             }
+            
+            
+            
             /*
              * Oscar Velasquez
              * Buscamos todos los Candidatos asociados al cliente
@@ -225,7 +228,13 @@ class ClientesController extends Controller {
                 'method' => 'POST',
             ));
             $empresaForm->add('submit', 'submit', array('label' => 'Crear'));
+            
             $empresas = $em->getRepository('RsmsTrabajandoBundle:Empresas')->findByCliente($id);
+            
+//             foreach ($empresas as $empresa) {
+//                $misEmpresas = $em->getRepository('RsmsTrabajandoBundle:EmpresaBolsaSms')->findByEmpresa($empresa);
+//                
+//            }
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Clientes entity.');

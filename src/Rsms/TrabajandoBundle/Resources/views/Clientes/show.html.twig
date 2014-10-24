@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="#datosSmsConsumidos">
                     <div class="panel-footer">
                         <span class="pull-left">SMS Consumidos</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -162,7 +162,7 @@
 
     <div class="row">
         <div class="col-lg-12" id="datosSmsAdquiridos">
-            <div class="panel panel-success">
+            <div class="panel panel-green">
                 <div class="panel-heading">
                     SMS adquiridos - {{ entity.nombre }}                      
                 </div>
@@ -251,6 +251,8 @@
         </div>
     </div>
 
+                                                                
+                                                                
     <div class="row" id="datosEmpresa">
         <div class="col-lg-12">
             <div class="panel panel-yellow">
@@ -401,10 +403,6 @@
 
                 <input id='error_sms' type='hidden' value='{{ error }}'>
 
-
-
-
-
                 {% endblock %}
                     {% block javascripts %}
                         {{ parent()}}
@@ -508,7 +506,6 @@
                                  */
 
                                 $('#rsms_trabajandobundle_clientes_ClientePaqueteSms_paqueteSms').append('<option value="Nuevo PaqueteSms">Crear PaqueteSms</option>');
-
                                 $('#rsms_trabajandobundle_empresas_EmpresaBolsaSms_bolsaSms').append('<option value="Nuevo BolsaSms">Crear BolsaSms</option>');
 
 
